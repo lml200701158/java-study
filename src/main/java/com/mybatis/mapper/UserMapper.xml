@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mybatis.dao.UserDao">
+    <!-- 根据uid查询一个用户信息 -->
+    <select id="selectUserById" parameterType="Integer" resultType="com.mybatis.entity.MyUser">
+        select * from user_test where uid = #{uid}
+    </select>
+    <!-- 查询所有用户信息 -->
+    <select id="selectAllUser" resultType="com.mybatis.entity.MyUser">
+        select * from user_test
+    </select>
+    <!-- 添加一个用户，#{uname}为 com.mybatis.po.MyUser 的属性值 -->
+    <insert id="addUser" parameterType="com.mybatis.entity.MyUser">
+        insert into user_test (uid,uname,usex)
+        values(#{uid},#{uname},#{usex})
+    </insert>
+    <!--修改一个用户 -->
+    <update id="updateUser" parameterType="com.mybatis.entity.MyUser">
+        update user_test set uname =#{uname},usex = #{usex} where uid = #{uid}
+    </update>
+    <!-- 删除一个用户 -->
+    <delete id="deleteUser" parameterType="Integer">
+        delete from user_test where uid= #{uid}
+    </delete>
+</mapper>

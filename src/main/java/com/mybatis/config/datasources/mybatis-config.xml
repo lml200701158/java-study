@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <settings>
+        <setting name="logImpl" value="LOG4J" />
+        <setting name="cacheEnabled" value="false"/>
+        <setting name="defaultExecutorType" value="REUSE"/>
+        <setting name="useGeneratedKeys" value="true"/>
+    </settings>
+
+<!--    &lt;!&ndash; 配置mybatis运行环境 &ndash;&gt;-->
+<!--    &lt;!&ndash; 如果只启动mybatis，这里一定需要；如果通过spring使用mybatis，这里可以删掉，因为SQL的配置在src/main/resources/applicationContext.xml中 &ndash;&gt;-->
+<!--    <environments default="development">-->
+<!--        <environment id="development">-->
+<!--            &lt;!&ndash; 使用JDBC的事务管理 &ndash;&gt;-->
+<!--            <transactionManager type="JDBC" />-->
+<!--            <dataSource type="POOLED">-->
+<!--                &lt;!&ndash; MySQL数据库驱动 &ndash;&gt;-->
+<!--                <property name="driver" value="com.mysql.jdbc.Driver" />-->
+<!--                &lt;!&ndash; 连接数据库的URL &ndash;&gt;-->
+<!--                <property name="url" value="jdbc:mysql://xxx:3104/xm_jointly?characterEncoding=utf8" />-->
+<!--                <property name="username" value="xxx" />-->
+<!--                <property name="password" value="xxx" />-->
+<!--            </dataSource>-->
+<!--        </environment>-->
+<!--    </environments>-->
+<!--&lt;!&ndash;     将mapper文件加入到配置文件中&ndash;&gt;-->
+<!--    <mappers>-->
+<!--        <mapper resource="com/mybatis/mapper/UserMapper.xml" />-->
+<!--    </mappers>-->
+</configuration>

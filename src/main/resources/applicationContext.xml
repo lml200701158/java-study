@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--suppress ALL -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/tx
+            http://www.springframework.org/schema/tx/spring-tx-2.5.xsd
+            http://www.springframework.org/schema/aop
+            http://www.springframework.org/schema/aop/spring-aop-2.5.xsd">
+
+    <!--启用@Autowired等注解-->
+    <context:annotation-config/>
+
+<!-- *********************************【工程文件-Begin】*******************************************  -->
+<!--        <bean id="car" class="com.java.spring.factorybean2.CarFactoryBean">-->
+<!--            <property name="carInfo" value="法拉利跑车,420,2600000"/>-->
+<!--        </bean>-->
+
+    <bean id="pets" class="com.java.annotation.spring.bean.test4.Pets" />
+    <bean id="cat" class="com.java.annotation.spring.bean.test4.Cat" />
+    <bean id="dog" class="com.java.annotation.spring.bean.test4.Dog" />
+
+<!--        <bean id="pets" class="com.java.annotation.spring.bean.test4.Pets" >-->
+<!--            <property name="cat" ref="cat" />-->
+<!--            <property name="dog" ref="dog" />-->
+<!--        </bean>-->
+<!--        <bean id="cat" class="com.java.annotation.spring.bean.test4.Cat" />-->
+<!--        <bean id="dog" class="com.java.annotation.spring.bean.test4.Dog" />-->
+
+<!--        <bean id="person" class="com.lvmenglou.person.Person">-->
+<!--            <property name="id" value="1"></property>-->
+<!--            <property name="name" value="zhangsan"></property>-->
+<!--            <property name="age" value="20"></property>-->
+<!--            <property name="gender" value="male"></property>-->
+<!--        </bean>-->
+
+    <!--使用context命名空间，通知spring扫描指定目录，进行注解的解析-->
+    <context:component-scan base-package="com.java.annotation.spring.bean.test4"/>
+    <context:component-scan base-package="com.lvmenglou"/>
+    <context:component-scan base-package="com.mybatis.dao" />
+    <context:component-scan base-package="com.mybatis.controller" />
+<!-- *********************************【工程文件-End】*******************************************  -->
+
+<!-- *********************************【AOP-Begin】*******************************************  -->
+<!--    <context:component-scan base-package="com.java.spring.aop.xml" />-->
+<!--    &lt;!&ndash;生成代理对象 &ndash;&gt;-->
+<!--    <bean id="customerDaoProxy" class="org.springframework.aop.framework.ProxyFactoryBean">-->
+<!--        &lt;!&ndash;代理实现的接口 &ndash;&gt;-->
+<!--        <property name="proxyInterfaces" value="com.java.spring.aop.xml.CustomerDao" />-->
+<!--        &lt;!&ndash;代理的目标对象 &ndash;&gt;-->
+<!--        <property name="target" ref="customerDao" />-->
+<!--        &lt;!&ndash;用通知增强目标 &ndash;&gt;-->
+<!--        <property name="interceptorNames" value="myAspect" />-->
+<!--        &lt;!&ndash; 如何生成代理，true:使用cglib; false :使用jdk动态代理 &ndash;&gt;-->
+<!--        <property name="proxyTargetClass" value="true" />-->
+<!--    </bean>-->
+
+
+<!--    &lt;!&ndash; 用于注解扫描 &ndash;&gt;-->
+<!--    <context:component-scan base-package="com.java.spring.aop.xml2" />-->
+<!--    <context:component-scan base-package="com.java.spring.aop.customer" />-->
+<!--    &lt;!&ndash; 使切面开启自动代理 &ndash;&gt;-->
+<!--    <aop:aspectj-autoproxy></aop:aspectj-autoproxy>-->
+<!--    &lt;!&ndash;AOP 编程 &ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        <aop:aspect ref="myAspect">-->
+<!--            &lt;!&ndash; 配置切入点，通知最后增强哪些方法 &ndash;&gt;-->
+<!--            <aop:pointcut expression="execution (* com.java.spring.aop.customer.*.* (..))" id="myPointCut" />-->
+<!--            &lt;!&ndash;前置通知，关联通知 Advice和切入点PointCut &ndash;&gt;-->
+<!--            <aop:before method="myBefore" pointcut-ref="myPointCut" />-->
+<!--            &lt;!&ndash;后置通知，在方法返回之后执行，就可以获得返回值returning 属性 &ndash;&gt;-->
+<!--            <aop:after-returning method="myAfterReturning" pointcut-ref="myPointCut" returning="returnVal" />-->
+<!--            &lt;!&ndash;环绕通知 &ndash;&gt;-->
+<!--            <aop:around method="myAround" pointcut-ref="myPointCut" />-->
+<!--            &lt;!&ndash;抛出通知：用于处理程序发生异常，可以接收当前方法产生的异常 &ndash;&gt;-->
+<!--            &lt;!&ndash; *注意：如果程序没有异常，则不会执行增强 &ndash;&gt;-->
+<!--            &lt;!&ndash; * throwing属性：用于设置通知第二个参数的名称，类型Throwable &ndash;&gt;-->
+<!--            <aop:after-throwing method="myAfterThrowing" pointcut-ref="myPointCut" throwing="e" />-->
+<!--            &lt;!&ndash;最终通知：无论程序发生任何事情，都将执行 &ndash;&gt;-->
+<!--            <aop:after method="myAfter" pointcut-ref="myPointCut" />-->
+<!--        </aop:aspect>-->
+<!--    </aop:config>-->
+
+
+    <context:component-scan base-package="com.java.spring.aop.cglib" />
+<!--    <context:component-scan base-package="com.java.spring.aop.annotation" />-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+<!-- *********************************【AOP-End】*********************************************  -->
+
+<!-- *********************************【数据库配置-Begin】*******************************************  -->
+
+    <!-- 用于加载配置文件 -->
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:jdbc.properties</value>
+        </property>
+    </bean>
+
+    <!-- 定义数据源 -->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="url" value="${jdbc.shop.url}"></property>
+        <property name="username" value="${jdbc.shop.username}"></property>
+        <property name="password" value="${jdbc.shop.password}"></property>
+    </bean>
+
+    <!-- 添加事务支持 -->
+    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource" />
+    </bean>
+    <!-- 注册事务管理驱动 -->
+    <tx:annotation-driven transaction-manager="txManager" />
+
+    <!-- 配置SqlSessionFactoryBean -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 引用数据源组件 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 引用DB XML配置文件 -->
+        <property name="mapperLocations" value="classpath*:com/mybatis/mapper/UserMapper.xml" />
+        <!-- 引用MyBatis配置文件中的配置 -->
+        <property name="configLocation" value="classpath:com/mybatis/config/datasources/mybatis-config.xml" />
+    </bean>
+
+    <!-- Mapper代理开发，使用Spring自动扫描MyBatis的接口并装配 （Spring将指定包中的所有被@Mapper注解标注的接口自动装配为MyBatis的映射接口） -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- mybatis-spring组件的扫描器，com.dao只需要接口（接口方法与SQL映射文件中的相同） -->
+        <property name="basePackage" value="com.mybatis.dao" />
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+    </bean>
+<!-- *********************************【数据库配置-End】*******************************************  -->
+
+</beans>
