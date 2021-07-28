@@ -128,6 +128,12 @@
             <version>1.9.4</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.rabbitmq</groupId>
+            <artifactId>amqp-client</artifactId>
+            <version>5.5.1</version>
+        </dependency>
+
         <!--其他需要的包-->
         <dependency>
             <groupId>org.apache.commons</groupId>
@@ -147,23 +153,6 @@
         <finalName>demo5</finalName>
         <pluginManagement><!-- lock down plugins versions to avoid using Maven defaults (may be moved to parent pom) -->
             <plugins>
-<!--                <plugin>-->
-<!--                    <artifactId>maven-clean-plugin</artifactId>-->
-<!--                    <version>3.1.0</version>-->
-<!--                </plugin>-->
-                <!-- see http://maven.apache.org/ref/current/maven-core/default-bindings.html#Plugin_bindings_for_war_packaging -->
-<!--                <plugin>-->
-<!--                    <artifactId>maven-resources-plugin</artifactId>-->
-<!--                    <version>3.0.2</version>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <artifactId>maven-compiler-plugin</artifactId>-->
-<!--                    <version>3.8.0</version>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <artifactId>maven-surefire-plugin</artifactId>-->
-<!--                    <version>2.22.1</version>-->
-<!--                </plugin>-->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-war-plugin</artifactId>
@@ -195,49 +184,18 @@
                         <skip>true</skip>
                     </configuration>
                 </plugin>
-<!--                <plugin>-->
-<!--                    <artifactId>maven-install-plugin</artifactId>-->
-<!--                    <version>2.5.2</version>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <artifactId>maven-deploy-plugin</artifactId>-->
-<!--                    <version>2.8.2</version>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-source-plugin</artifactId>-->
-<!--                    <version>2.1.1</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>attach-sources</id>-->
-<!--                            <phase>verify</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>jar-no-fork</goal>-->
-<!--                            </goals>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
-<!--                <plugin>-->
-<!--                    <groupId>org.apache.maven.plugins</groupId>-->
-<!--                    <artifactId>maven-antrun-plugin</artifactId>-->
-<!--                    <version>1.1</version>-->
-<!--                    <executions>-->
-<!--                        <execution>-->
-<!--                            <id>id.clean</id>-->
-<!--                            <phase>clean</phase>-->
-<!--                            <goals>-->
-<!--                                <goal>run</goal>-->
-<!--                            </goals>-->
-<!--                            <configuration>-->
-<!--                                <tasks>-->
-<!--                                    <echo>clean phase</echo>-->
-<!--                                </tasks>-->
-<!--                            </configuration>-->
-<!--                        </execution>-->
-<!--                    </executions>-->
-<!--                </plugin>-->
             </plugins>
         </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>8</source>
+                    <target>8</target>
+                </configuration>
+            </plugin>
+        </plugins>
 
         <!-- 如果不加这个，执行时，会找不到*.xml文件，参考：https://blog.csdn.net/wt_better/article/details/90261220 -->
 
