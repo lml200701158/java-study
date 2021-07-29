@@ -39,7 +39,7 @@ public class RabbitMqTest {
     }
 
     @Test
-    public void consumer() throws java.io.IOException, TimeoutException {
+    public void consumer() throws java.io.IOException, TimeoutException, InterruptedException {
         //创建连接工厂
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("127.0.0.1");
@@ -59,5 +59,7 @@ public class RabbitMqTest {
             System.out.println(" [x] Received '" + message + "'");
         };
         channel.basicConsume(QUEUE_NAME, true, deliverCallback, consumerTag -> {});
+
+        Thread.sleep(1000 * 60 * 100);
     }
 }
