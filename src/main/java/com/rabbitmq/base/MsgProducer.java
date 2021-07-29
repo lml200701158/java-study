@@ -15,11 +15,30 @@ public class MsgProducer {
         Connection connection = factory.newConnection();
         //创建消息通道
         Channel channel = connection.createChannel();
+
         // 声明exchange中的消息为可持久化，不自动删除
         channel.exchangeDeclare(exchange, exchangeType, true, false, null);
 
         // 发布消息
         channel.basicPublish(exchange, toutingKey, null, message.getBytes());
+
+        System.out.println("Sent '" + message + "'");
+        channel.close();
+        connection.close();
+    }
+
+    public static void publishMsgV2(String exchange, BuiltinExchangeType exchangeType, String message) throws IOException, TimeoutException {
+        ConnectionFactory factory = RabbitUtil.getConnectionFactory();
+        //创建连接
+        Connection connection = factory.newConnection();
+        //创建消息通道
+        Channel channel = connection.createChannel();
+
+        // 声明exchange中的消息
+        channel.exchangeDeclare(exchange, exchangeType);
+
+        // 发布消息
+        channel.basicPublish(exchange, "", null, message.getBytes("UTF-8"));
 
         System.out.println("Sent '" + message + "'");
         channel.close();

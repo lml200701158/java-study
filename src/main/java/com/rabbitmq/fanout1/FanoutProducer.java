@@ -1,4 +1,4 @@
-package com.rabbitmq.fanout;
+package com.rabbitmq.fanout1;
 
 import com.rabbitmq.base.MsgProducer;
 import com.rabbitmq.client.BuiltinExchangeType;
