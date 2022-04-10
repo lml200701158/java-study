@@ -11,6 +11,64 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
+@Service
+public class UserController {
+    @Autowired
+    private UserDao userDao;
+
+    public void update(Integer id) {
+        MyUser user = new MyUser();
+        user.setUid(id);
+        user.setUname("张三-testing");
+        user.setUsex("女");
+        userDao.updateUser(user);
+    }
+
+    public MyUser query(Integer id) {
+        MyUser user = userDao.selectUserById(id);
+        return user;
+    }
+
+    // 正常情况
+    @Transactional
+    public void testSuccess() throws Exception {
+        Integer id = 1;
+        MyUser user = query(id);
+        System.out.println("原记录:" + user);
+        update(id);
+        throw new Exception("事务生效");
+    }
+
+    // 用于测试 Case1: 类内部访问
+    public void testInteralCall() throws Exception {
+        testSuccess();
+        throw new Exception("事务不生效：类内部访问");
+    }
+
+    // 用于测试 Case2: 异常不匹配
+    @Transactional
+    public void testExceptionNotMatch() throws Exception {
+        Integer id = 1;
+        MyUser user = query(id);
+        System.out.println("原记录:" + user);
+        update(id);
+        throw new Exception("事务不生效：异常不匹配");
+    }
+
+    // 用于测试 Case4: 多线程
+    @Transactional(rollbackFor = Exception.class)
+    public void testMultThread() {
+        new Thread(new Runnable() {
+            @SneakyThrows
+            @Override
+            public void run() {
+                testSuccess();
+            }
+        }).start();
+    }
+}
+
+
 //@Service
 //public class UserController {
 //    @Autowired
@@ -29,22 +87,35 @@ import java.util.List;
 //        return user;
 //    }
 //
+//    // 正常情况
 //    @Transactional(rollbackFor = Exception.class)
 //    public void testSuccess() throws Exception {
 //        Integer id = 1;
 //        MyUser user = query(id);
 //        System.out.println("原记录:" + user);
 //        update(id);
-//        throw new Exception("测试事务生效");
+//        throw new Exception("事务生效");
 //    }
 //
-//    public void testFail() throws Exception {
+//    // 用于测试 Case1: 类内部访问
+//    public void testInteralCall() throws Exception {
 //        testSuccess();
-//        throw new Exception("测试事务不生效");
+//        throw new Exception("事务不生效：类内部访问");
 //    }
 //
+//    // 用于测试 Case2: 异常不匹配
+//    @Transactional
+//    public void testExceptionNotMatch() throws Exception {
+//        Integer id = 1;
+//        MyUser user = query(id);
+//        System.out.println("原记录:" + user);
+//        update(id);
+//        throw new Exception("事务不生效：异常不匹配");
+//    }
+//
+//    // 用于测试 Case4: 多线程
 //    @Transactional(rollbackFor = Exception.class)
-//    public void testMultThread() throws Exception {
+//    public void testMultThread() {
 //        new Thread(new Runnable() {
 //            @SneakyThrows
 //            @Override
@@ -57,22 +128,22 @@ import java.util.List;
 
 
 
-@Controller("userController")
-public class UserController {
-    @Autowired
-    private UserDao userDao;
-    public void test() {
-        // 查询一个用户
-        MyUser auser = userDao.selectUserById(1);
-        System.out.println(auser);
-        System.out.println("============================");
-        // 查询所有用户
-        List<MyUser> list = userDao.selectAllUser();
-        for (MyUser myUser : list) {
-            System.out.println(myUser);
-        }
-    }
-}
+//@Controller("userController")
+//public class UserController {
+//    @Autowired
+//    private UserDao userDao;
+//    public void test() {
+//        // 查询一个用户
+//        MyUser auser = userDao.selectUserById(1);
+//        System.out.println(auser);
+//        System.out.println("============================");
+//        // 查询所有用户
+//        List<MyUser> list = userDao.selectAllUser();
+//        for (MyUser myUser : list) {
+//            System.out.println(myUser);
+//        }
+//    }
+//}
 
 //@Controller("userController")
 //public class UserController {
