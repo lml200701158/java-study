@@ -10,6 +10,6 @@ public class SpringMyBatisTest {
         String xmlPath = "applicationContext.xml";
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext(xmlPath);
         UserController uc = (UserController) applicationContext.getBean("userController");
-        uc.test();
+//        uc.test();
     }
 }

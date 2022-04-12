@@ -1,5 +1,6 @@
 package com.mybatis.controller;
 
+import com.java.annotation.spring.bean.Transactional.Error2;
 import com.mybatis.dao.UserDao;
 import com.mybatis.entity.MyUser;
 import lombok.SneakyThrows;
@@ -65,6 +66,16 @@ public class UserController {
                 testSuccess();
             }
         }).start();
+    }
+
+    // Java Bug 测试
+    @Transactional(rollbackFor = Error.class)
+    public void testJavaBug() throws Error2 {
+        Integer id = 1;
+        MyUser user = query(id);
+        System.out.println("原记录:" + user);
+        update(id);
+        throw new Error2("事务生效");
     }
 }
 
