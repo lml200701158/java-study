@@ -19,7 +19,7 @@
 <!--                &lt;!&ndash; MySQL数据库驱动 &ndash;&gt;-->
 <!--                <property name="driver" value="com.mysql.jdbc.Driver" />-->
 <!--                &lt;!&ndash; 连接数据库的URL &ndash;&gt;-->
-<!--                <property name="url" value="jdbc:mysql://xxx:3104/xm_jointly?characterEncoding=utf8" />-->
+<!--                <property name="url" value="jdbc:mysql://xxx:3104/java_study?characterEncoding=utf8" />-->
 <!--                <property name="username" value="xxx" />-->
 <!--                <property name="password" value="xxx" />-->
 <!--            </dataSource>-->

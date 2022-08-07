@@ -13,7 +13,7 @@ public class MultiThreadProcess {
      * @param batchSize 单次处理的数量
      * @return
      */
-    private static List<List<Integer>> getProcessData(Integer batchSize) {
+    public static List<List<Integer>> getProcessData(Integer batchSize) {
         List<Integer> originData = new ArrayList<>();
         for (int i = 1; i <= 20; i++) {
             originData.add(i);
@@ -27,7 +27,7 @@ public class MultiThreadProcess {
      * @param req
      * @return
      */
-    private static List<String> processOneThread(List<Integer> req) throws InterruptedException {
+    public static List<String> processOneThread(List<Integer> req) throws InterruptedException {
         List<String> output = new ArrayList<>();
         for (Integer value : req) {
             output.add(String.valueOf(value +  1));
@@ -44,7 +44,7 @@ public class MultiThreadProcess {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    private static List<String> processByWrongMultiThread(Integer batchSize) throws ExecutionException, InterruptedException {
+    public static List<String> processByWrongMultiThread(Integer batchSize) throws ExecutionException, InterruptedException {
         List<String> output = new ArrayList<>();
         List<List<Integer>> batchProcessData = getProcessData(batchSize);
 
@@ -73,7 +73,7 @@ public class MultiThreadProcess {
      * @throws ExecutionException
      * @throws InterruptedException
      */
-    private static List<String> processByMultiThread(Integer batchSize) throws ExecutionException, InterruptedException {
+    public static List<String> processByMultiThread(Integer batchSize) throws ExecutionException, InterruptedException {
         List<String> output = new ArrayList<>();
 
         // 获取分批数据
@@ -101,7 +101,7 @@ public class MultiThreadProcess {
      * @param batchSize
      * @return
      */
-    private static List<String> processByPool(Integer batchSize) throws ExecutionException, InterruptedException {
+    public static List<String> processByPool(Integer batchSize) throws ExecutionException, InterruptedException {
         List<String> output = new ArrayList<>();
         List<List<Integer>> batchProcessData = getProcessData(batchSize);
 
@@ -130,7 +130,7 @@ public class MultiThreadProcess {
      * @param batchSize
      * @return
      */
-    private static List<String> processByPoolSingle(Integer batchSize) throws ExecutionException, InterruptedException {
+    public List<String> processByPoolSingle(Integer batchSize) throws ExecutionException, InterruptedException {
         List<String> output = new ArrayList<>();
 
         List<List<Integer>> batchProcessData = getProcessData(batchSize);

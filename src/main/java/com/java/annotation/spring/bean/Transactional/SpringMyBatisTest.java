@@ -11,9 +11,7 @@ public class SpringMyBatisTest {
         ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
         UserController uc = (UserController) applicationContext.getBean("userController");
         try {
-            uc.testJavaBug();
-        } catch (Error2 error2) {
-            error2.printStackTrace();
+            uc.testSuccess();
         } finally {
             MyUser user =  uc.query(1);
             System.out.println("修改后的记录:" + user);

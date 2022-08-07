@@ -1,6 +1,7 @@
 import com.demo.AppDeptConverter;
 import com.demo.DeptCalcuateDTO;
 import com.demo.DeptDTO;
+import com.java.parallel.share.MultiThreadProcess;
 import com.lvmenglou.dao.PersonDaoImpl;
 import com.sun.jmx.snmp.Timestamp;
 import org.apache.commons.lang3.math.NumberUtils;
@@ -22,6 +23,9 @@ public class test {
     private AppDeptConverter appDeptConverter;
 
     public static void main(String[] args) {
+
+        MultiThreadProcess multiThreadProcess = new MultiThreadProcess();
+
         testJava8_2();
     }
 
