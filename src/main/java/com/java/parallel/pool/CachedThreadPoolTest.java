@@ -7,6 +7,7 @@ public class CachedThreadPoolTest {
     public static void main(String args[]) {
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
         cachedThreadPool.execute(new Runnable(){
+            @Override
             public void run() {
                 System.out.println(Thread.currentThread().getName() + "--->运行");
             }
